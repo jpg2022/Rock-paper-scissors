@@ -9,9 +9,12 @@ function playRound(playerSelection, computerSelection){
 
     }else if((playerint + 1) % 3 == computerint){
         console.log("Computer wins because computer's "  + computerSelection + " beats player's " + playerSelection + "!");
+        return 0;
     }else{
         console.log("Player wins because player's " + playerSelection + " beats computer's " + computerSelection + "!");
+        return 1;
     }
+    
 
 
 }
@@ -25,7 +28,8 @@ function getComputerChoice(){
 }
 
 function game(){
-    var computerwins, playerwins;
+    let computerwins = 0;
+    let playerwins = 0;
     for(let i = 0; i < 5; i++){
         const choices = ["rock", "paper", "scissors"];
         let playerSelection = prompt("Enter rock paper or scissors.");
@@ -34,9 +38,21 @@ function game(){
             console.log("Please enter valid choice.");
         }
         const computerSelection = getComputerChoice();
-        console.log(playRound(playerSelection, computerSelection));
+        let count = playRound(playerSelection, computerSelection);
+        if(count == 1){
+            playerwins +=1;
+        }else if(count == 0){
+            computerwins +=1;
+        }
         
+    }
+    if(playerwins > computerwins){
+        console.log("Player beat computer with " + playerwins +" wins!");
+    }else{
+        console.log("Computer beat player with " + computerwins + " wins!");
     }
 
 }
+
+game();
 
